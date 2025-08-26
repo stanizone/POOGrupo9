@@ -146,16 +146,17 @@ Estos comandos se ejecutan en Git Bash (Terminal de Git en Windows)
     Por defecto, si no especificamos el commit, hace referencia al último (el más reciente).
     También puede sacar un archivo del stage que estás haciendo.
 
+    Git reset te regresa al commit que le has dicho, y elimina los commits posteriores, PERO los cambios que hiciste en los commit siguientes siguen en tu repositorio local o en el stage, según el rest normal o soft.
+
     10.0. **Git reset archivo** = Te quita un archivo del stage.
 
-    10.1. **Git reset** = Elimina el último commit, pero conservamos los cambios de forma local, tenemos que hacerle stage nosotros.
+    10.1. **Git reset** = Elimina los commits después del commit que especificamos, pero conservamos los cambios de forma local, tenemos que hacerle stage nosotros.
 
-    10.2. **git reset --soft** = Elimina el último commit, pero conservamos los cambios de forma local y se quedan en stage. 
+    10.2. **git reset --soft** = Elimina los commits después del commit que especificamos, pero conservamos los cambios de forma local y se quedan en stage. 
 
     10.3. **Git reset -h** = ELIMINA los commits después del commit en el que usemos este comando o del que especifiquemos. NO conserva los cambios de los commits siguientes.
 
-
-    QUE PASA EN CASO HAY MAS COMMITS DESPUES?
+    **Qué pasa en caso hay commits después?**
 
     No importa, el reset normal y el soft conservan sus cambios.
 
@@ -168,4 +169,68 @@ Estos comandos se ejecutan en Git Bash (Terminal de Git en Windows)
 12. **GIT REVERT**
   
     Borra el commit, pero enlaza el anterior commit con el siguiente commit (si es que existen)
+
+---
+
+### Cómo enlazar nuestro proyecto a GitHub?
+
+Para conectar (enviar) nuestro repositorio local git usamos lo siguiente:
+  
+    git remote add origin git@github.com:nombreUsuarioEnGithub/nombrerepositorioEnGithub.git
+  
+   Entonces el repositorio local (la carpeta que tenia .git adentro) va a establecer una relacion
+   con el repositorio en github (repositorio remoto)
+  
+   Para enviarle la info del repositorio local por primera vez, usa git push -u origin main (o master, el nombre de nuestra rama principal) Origin es el repositorio que está en github
    
+---
+
+### Comandos de GitHub
+
+
+1. **GIT PUSH** = Transforma el repositorio remoto como el repositorio local? 
+                  (Descarga el historial y los commits)
+  
+
+2. **GIT FETCH**
+   
+   Descarga el repositorio remoto en el repositorio local. No es que transforma el local como está en el remoto. Simplemente te deja ver los cambios (commits) que se hizo en el remoto. Esto se puede ver en git tree.
+   BASICAMENTE TE DESCARGA EL HISTORIAL DE CAMBIOS.
+
+
+3. **GIT PULL**
+   
+   Transforma el repositorio local como está en el repositorio remoto.
+   (Descarga el historial y los commits)
+  
+   Si modificamos un archivo en el repositorio local sin hacerle push después y alguien AGREGA un archivo al repositorio remoto, si intentáramos hacer un git pull para traernos el nuevo archivo, cómo hariamos para conservar el archivo que acabamos de modificar?
+  
+   En este caso, tenemos que usar git config pull.rebase false (esto va a hacer un merge internamente), de esta forma, en el repositorio local tendríamos el nuevo archivo y el otro archivo que fue modificado. Este comando solo se necesita poner 1 vez.            
+  
+
+4. **GIT CLONE**
+  
+   TE CLONA TODO EL REPOSITORIO de forma local, solo se usa 1 vez. Te crea una carpeta y dentro de esa carpeta se encontrará todo lo que hay en el repositorio de github.
+   Usalo cuando quieras copiar un repositorio de github que no tengas, por ejemplo, cuando te invitan a un proyecto.
+  
+
+5. **FORK**
+  
+   Un fork es una copia (clone) en GITHUB de un repositorio que no es tuyo y no puedes enviar un push para modificar el repositorio remoto (porque necesitas permisos para modificarlo tú)
+   
+   Para esto, creamos un fork presionando el icono de fork en el proyecto que queremos copiar,
+   esto nos creará un repo en nuestra cuenta con todo lo que tenía el repo en el q no tenias permisos (nos copia el repositorio), entonces, ahora si podrías hacerle push para agregarle cambios, porque está en tu cuenta y no es el repo original.
+  
+
+6. **PULL REQUEST** 
+  
+   Esto es para decirle al dueño del repositorio original que has hecho algún commit en tu fork y quieres que cambie el archivo original a como está en tu fork. El dueño decide si hacerlo o no. (esto hace un merge)
+  
+   6.1. **CONFLICTOS EN PULL REQUEST**
+  
+   Digamos que en el repo original añadimos un readme, en el cual deciamos que todos los estudiantes pongan sus nombres. Entonces, los estudiantes hicieron fork cuando no había nadie en el readme, y luego el profesor actualizaba los nombres.
+   Pero, digamos que ahora el repo original tiene 1 nombre en la primera linea, y un estudiante que también envió su nombre en la primera linea le solicita un pull request, como ambos estan en la misma posición, que se hace en estos casos?
+
+   Esto se edita de manera manual, tenemos que ver el conflicto del merge y ya que es una pull request, solucionarlo desde github. 
+  
+   Esto solo edita lo que se ha mandado por pull request, solo hemos solucionado el conflicto y actualizado el pull request, no te olvides de mandar los cambios para actualizar el repo original.
