@@ -79,7 +79,9 @@ Estos comandos se ejecutan en Git Bash (Terminal de Git en Windows)
   
    Al hacer merge, se crea un commit para juntar ambos. Los nuevos archivos que creamos en la segundaa rama se van a agregar a la primera.
   
-   3.1 **Conflictos**
+   ![fotoo](fotos/gitMerges.PNG)
+
+   3.1 **Conflictos en Merges**
 
    Si editamos una parte de un archivo el cual ya tenía informacion, empiezan los conflictos, porque git no sabe con cuál de los 2 quedarse. 
    
@@ -102,14 +104,20 @@ Estos comandos se ejecutan en Git Bash (Terminal de Git en Windows)
   
    Si queremos verlo como un árbol, podemos hacer esto: git config --global alias.tree "log --graph --decorate --all --oneline". Ahora explicaremos lo que es un alias.
 
+   ![fotogitlog](fotos/git%20log.PNG)
+
    
 5. **GIT ALIAS**
   
    Permite asignarle un comando git a un nombre, ej: git config --global alias.historialRamas "log" Entonces, si ejecutamos el comando git historialRamas, se ejecuta el git log
   
+
 6. **GIT STATUS** 
    
    Nos enseña si hay cambios que todavía no hemos hecho commit, o si están o no en el stage.
+
+   ![fotogitstatus](fotos/git%20status.PNG)
+
 
 7. **GIT ADD Y GIT COMMIT**
       
@@ -163,6 +171,8 @@ Estos comandos se ejecutan en Git Bash (Terminal de Git en Windows)
     **Qué pasa en caso hay commits después?**
 
     No importa, el reset normal y el soft conservan sus cambios.
+
+    ![foto](fotos/git%20Reset.PNG)
 
 11. **GIT REFLOG**
   
@@ -219,6 +229,7 @@ Para conectar (enviar) nuestro repositorio local git usamos lo siguiente:
    TE CLONA TODO EL REPOSITORIO de forma local, solo se usa 1 vez. Te crea una carpeta y dentro de esa carpeta se encontrará todo lo que hay en el repositorio de github.
    Usalo cuando quieras copiar un repositorio de github que no tengas, por ejemplo, cuando te invitan a un proyecto.
   
+   ![fot](fotos/git%20clone.PNG)
 
 5. **FORK**
   
