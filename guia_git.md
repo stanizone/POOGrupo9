@@ -251,3 +251,36 @@ Para conectar (enviar) nuestro repositorio local git usamos lo siguiente:
    Esto se edita de manera manual, tenemos que ver el conflicto del merge y ya que es una pull request, solucionarlo desde github. 
   
    Esto solo edita lo que se ha mandado por pull request, solo hemos solucionado el conflicto y actualizado el pull request, no te olvides de mandar los cambios para actualizar el repo original.
+---
+### Git Flow y la importancia de las ramas
+
+Las ramas o branches nos brindan espacios de trabajo aislados para desarrollar nuevas funcionalidades, corregir errores o experimentar de forma segura, sin afectar al código principal del proyecto.
+
+Los desarrolladores en github tienen diferentes maneras de trabajar con ramas en git, pero hay desarrolladores que prefieren usar un estándar de reglas, las cuales no son reglas obligatorias como tal, sino, como un modelo que intentan seguir.
+
+**Gitflow** es muy usado para proyectos que tienen un ciclo de publicación programado, es decir, que tiene que recibir y mostrar cambios cada cierto tiempo e ir en constante actualización.
+
+**Gitflow** trabaja con 5 "tipos" de ramas: Master, Develop, Release, Hotfix y Feature:
+
+1. Develop: Usaremos este tipo de rama para desarrollar nuestro software.
+
+2. Feature: Nuevas características, funcionalidades o correcciones de errores del software.
+
+3. Release: Rama que usaremos antes de publicar una nueva versión (antes de hacer la publicación en master)
+
+4. Master: Usala cuando tengas una nueva versión de tu proyecto, o sea, cuando hayas terminado lo que te propusiste a hacer en ese momento, tu meta. En caso en algún futuro quieras hacer cosas extra, vuelve a la rama develop, feature, release y luego cuando termines la nueva función o implementación extra que te propusiste, envias otra versión mediante Master. Esta rama tiene las versiones finales.
+
+5. Hotfix: A veces, encontramos algún error incluso en la rama master a pesar de todos los cambios y todo lo que intentamos hacer, entonces, hacemos un hotfix para arreglar los errores de la rama master.
+
+    ![fotogitflow](fotos/gitflow1.PNG)
+
+---
+### Cómo hacer un buen commit?
+
+Para hacer un buen y legible commit, podemos seguir estos pasos:
+
+1. Usa como máximo 50 carácteres para tu mensaje de commit.
+2. Usar verbos imperativos como Add, Change, Fix, Remove según lo que hagamos.
+3. No uses punto final ni puntos suspensivos en tus mensajes, porque es el título del commit, y los títulos no llevan ".".
+4. Añade todo el contexto que sea necesario en el cuerpo del mensaje de commit luego del mensaje, puedes hacer otro -m "mensaje". 
+
