@@ -1,4 +1,4 @@
-package caso1;
+package Caso1.src;
 
 /**
  *

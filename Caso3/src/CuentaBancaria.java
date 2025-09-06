@@ -1,4 +1,4 @@
-package caso3;
+package Caso3.src;
 
 public class CuentaBancaria {
     private double saldo;

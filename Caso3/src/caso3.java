@@ -1,8 +1,8 @@
-package caso3;
+package Caso3.src;
 
 import java.util.Scanner;
 
-public class Programa {
+public class caso3 {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

@@ -1,5 +1,8 @@
-public class Main {
-    public static void main(String[] args) {
+package src;
+public class caso2
+{
+    public static void main(String[] args) 
+    {
         System.out.println("=== CASO 2: CLASE ESTUDIANTE CON ATRIBUTOS PRIVADOS ===\n");
         
        
@@ -38,7 +41,7 @@ public class Main {
         
         Estudiante estudiante2 = new Estudiante("Carlos", "Ramírez", 19, "Administración", 9.5, "2024002");
         
-        System.out.println("\nSegundo estudiante (constructor parametrizado):");
+        System.out.println("\nSegundo estudiante:");
         estudiante2.mostrarInformacion();
         
         if (estudiante2.estaAprobado()) {
@@ -60,10 +63,12 @@ public class Main {
         }
     }
 
-    
+   
 }
 
-class Estudiante {
+
+class Estudiante 
+{
     
     private String nombre;
     private String apellido;
