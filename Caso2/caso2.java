@@ -1,4 +1,67 @@
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("=== CASO 2: CLASE ESTUDIANTE CON ATRIBUTOS PRIVADOS ===\n");
+        
+       
+        Estudiante estudiante1 = new Estudiante();
+        
+    
+        estudiante1.setNombre("María");
+        estudiante1.setApellido("González");
+        estudiante1.setEdad(20);
+        estudiante1.setCarrera("Ingeniería de Sistemas");
+        estudiante1.setPromedio(15.5);
+        estudiante1.setCodigo("2024001");
+        
+        
+        System.out.println("Información obtenida con métodos GET:");
+        System.out.println("Nombre: " + estudiante1.getNombre());
+        System.out.println("Apellido: " + estudiante1.getApellido());
+        System.out.println("Edad: " + estudiante1.getEdad());
+        System.out.println("Carrera: " + estudiante1.getCarrera());
+        System.out.println("Promedio: " + estudiante1.getPromedio());
+        System.out.println("Código: " + estudiante1.getCodigo());
+        System.out.println();
+        
+ 
+        estudiante1.mostrarInformacion();
+        
+       
+        if (estudiante1.estaAprobado()) {
+            System.out.println("El estudiante APROBÓ con promedio: " + estudiante1.getPromedio());
+        } else {
+            System.out.println("El estudiante DESAPROBÓ con promedio: " + estudiante1.getPromedio());
+        }
+        
+        System.out.println("\n" + "=".repeat(50));
+        
+        
+        Estudiante estudiante2 = new Estudiante("Carlos", "Ramírez", 19, "Administración", 9.5, "2024002");
+        
+        System.out.println("\nSegundo estudiante (constructor parametrizado):");
+        estudiante2.mostrarInformacion();
+        
+        if (estudiante2.estaAprobado()) {
+            System.out.println("El estudiante APROBÓ con promedio: " + estudiante2.getPromedio());
+        } else {
+            System.out.println("El estudiante DESAPROBÓ con promedio: " + estudiante2.getPromedio());
+        }
+        
+     
+        System.out.println("\n--- Modificando datos del estudiante 2 ---");
+        estudiante2.setPromedio(13.8); 
+        estudiante2.setEdad(20);
+        
+        System.out.println("Después de la modificación:");
+        estudiante2.mostrarInformacion();
+        
+        if (estudiante2.estaAprobado()) {
+            System.out.println("Ahora el estudiante APROBÓ con promedio: " + estudiante2.getPromedio());
+        }
+    }
 
+    
+}
 
 class Estudiante {
     
