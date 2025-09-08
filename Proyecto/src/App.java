@@ -34,7 +34,10 @@ public class App
             System.out.println("2. Reservar habitación");
             System.out.println("3. Consultar habitación");
             System.out.println("4. Dejar feedback");
-            System.out.println("5. Salir");
+            System.out.println("5. Pedir comida a habitación");
+            System.out.println("6. Comer");
+            System.out.println("7. Ver información de usuarios");
+            System.out.println("8. Salir");
 
             try 
             {
@@ -46,7 +49,7 @@ public class App
                 System.out.println("Ingresa una opción (número)");
             }
          
-          }while(opcion != 5);
+          }while(opcion != 8);
 
           leer.close();
     }
@@ -80,6 +83,8 @@ public class App
       private String tienePromocion = "no";
       private int numHab;
       private int totalAPagar;
+      private boolean solicitoComida = false;
+      private String comida;
 
        public Cliente(int DNI, String nombre, String apellido, String fechaNacimiento, String tienePromocion)
        {
@@ -102,13 +107,65 @@ public class App
            {
             this.totalAPagar = num;
            }
+
+           public void solicitarComida()
+           { 
+             Scanner sc = new Scanner(System.in);
+             if(solicitoComida == true)
+             {
+                System.out.println("Ya has pedido comida!");
+                return;
+             }
+             System.out.println("\nElija la opción que quiera comer\n1. Lasaña\n2. Causa\n3. Pan con chicharrón");
+            
+             this.solicitoComida = true;
+
+             try
+             {
+                int op = sc.nextInt();
+                switch(op)
+                {
+                    case 1: comida = "lasaña";
+                    break;
+
+                    case 2: comida = "causa";
+                    break;
+                    
+                    case 3: comida = "pan con chicharrón";
+                    break;
+
+                    default:
+                    System.out.println("Esta no es una opción válida");
+                    return;
+                }
+
+                try
+                {
+                  System.out.println("El cliente " + this.nombre + " solicita comer " + comida + "\nDespués de unos minutos, la comida llega a su puerta.");
+                }
+                catch(Exception e)
+                {
+                  System.out.println("Esta no es una opción válida");   
+                }
+             }
+             catch(Exception e)
+             {
+                System.out.println("Elija un número!");
+                sc.nextLine();
+             }
+
+           }
+
+           public void Comer()
+           {
+             System.out.println(this.nombre + " está comiendo " + comida);
+           }
     }
 
     static class Habitacion
     {
        private int numero = 0;
        private String tipo = "";
-       private Cliente cliente = null;
        private boolean ocupado = false;
        private int precioPorNoche = 0;
        private int diasReservados = 0;
@@ -137,5 +194,10 @@ public class App
         this.diasReservados = num;
        }
     }
+
+    // notas: crear una clase Supervisor, el cual pueda buscar usuarios, lo que debe buscar ese usuario, su Dni, nombre y la habitación en la que está. 
+    // Para usar esta opción de buscarla, se tendrá una opcion más, la cual será "Buscar informacion de cliente" el cual pida el DNI del supervisor para poder continuar.
+    // El supervisor también debe ver los feedbacks.
+
 }
 
