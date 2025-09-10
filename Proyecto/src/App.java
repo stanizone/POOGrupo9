@@ -2,14 +2,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
-import javax.print.DocFlavor.STRING;
 
 public class App 
 {
     public static void main(String[] args)
     {
-      //PARA QUE NO TENGAMOS QUE PEDIR DNI Y TODO ESO, MEJOR HAGAMOS ESTO: GUARDAMOS EL USUARIO EN UNA VARIABLE Y LUEGO CREAMOS UNA NUEVA OPCION QUE TE PERMITA CAMBIAR DE USUARIO.
-      //Luego en las opciones, hacemos que se ejecute cuando cliactual no sea null y mandamos error cuando cliactual es null
 
           Scanner leer = new Scanner(System.in);
           List<Cliente> clientes = new LinkedList<>();
@@ -19,10 +16,9 @@ public class App
 
           //Clientes ya generados
           Cliente cliactual = null;
-          Cliente cliente1 = new Cliente(72733562, "Stefanno", "Rossel", "15-10-04", "si");
-          Cliente cliente2 = new Cliente(30303030, "Ramon", "Valdez", "20-05-66", "no");
+          Cliente cliente1 = new Cliente(72733562, "Stefanno", "Rossel", "15-10-04", "papaya3");
           clientes.add(cliente1);
-          clientes.add(cliente2);
+          
 
           //habitaciones ya generadas
           Habitacion hab1 = new Habitacion(101, "Individual", 20);    habitaciones.add(hab1);
@@ -33,7 +29,7 @@ public class App
           Habitacion hab6 = new Habitacion(302, "Triple", 35);        habitaciones.add(hab6);
 
           //supervisor generado:
-          Supervisor Javier = new Supervisor(78085567, "Javier", "Conde", "10-06-76", "grupo9poo");
+          Supervisor Javier = new Supervisor(78085567, "Javier", "Conde", "10-06-76", "Gelatina");
 
           do 
           {
@@ -113,16 +109,14 @@ public class App
                                }
                                else
                                {
-                                 System.out.print("Tiene promoción?");
-                                 String tienepromo = leer.nextLine().trim();
-                            
-
-                                 // Crear cliente
-                                 Cliente nuevo = new Cliente(dni, nombre, apellido, fechaNacimiento, tienepromo);
-                                 clientes.add(nuevo);
-                                 cliactual = nuevo;
-                                 System.out.println("Has creado un cliente");
-                                 break;
+                                  System.out.println("Cree su contraseña");
+                                  String contraseña = leer.nextLine();
+                                
+                                  Cliente nuevo = new Cliente(dni, nombre, apellido, fechaNacimiento,contraseña);
+                                  clientes.add(nuevo);
+                                  cliactual = nuevo;
+                                  System.out.println("Has creado un cliente");
+                                  break; 
                                }
                                
                             }
@@ -176,7 +170,8 @@ public class App
 
                             System.out.println("\nEl cliente " + cliactual.nombre + " con DNI " + cliactual.DNI + " ha reservado la habitación por " + numDias + " días"); 
                             habElegida.ocupado = true;
-                            habElegida.diasReservados = numDias;                      
+                            habElegida.diasReservados = numDias;   
+                            cliactual.totalAPagar = (habElegida.precioPorNoche * numDias);              
                           }
                           
 
@@ -239,6 +234,10 @@ public class App
                         {
                           System.out.println("Necesitas estar registrado");
                         }
+                        else if(cliactual.comida == null)
+                        {
+                          System.out.println("Para comer, primero debes pedir comida");
+                        }
                         else
                         {
                           cliactual.Comer();
@@ -247,8 +246,13 @@ public class App
                     
                     case 7: 
                         System.out.println("Bienvenido supervisor, escriba su contraseña.");
-                        String contraseña = leer.nextLine();
-                        if(contraseña == Javier.contraseña)
+                        String contra = leer.nextLine();
+
+                        if(!Javier.contraseña.equals(contra))
+                        {
+                          System.out.println("Contraseña incorrecta");
+                        }
+                        else
                         {
                           System.out.println("Escriba el DNI del usuario que desea ver");
                           try
@@ -261,20 +265,21 @@ public class App
                           {
                             System.out.println("DNI incorrecto");
                             leer.nextLine();
-                          }
-                        }
-                        else
-                        {
-                          System.out.println("Contraseña incorrecta");  
+                          }  
                         }
                         break;
 
                     case 8:
                         System.out.println("Bienvenido supervisor, escriba su contraseña.");
-                        contraseña = leer.nextLine();
-                        if(contraseña == Javier.contraseña)
+                        contra = leer.nextLine();
+                        
+                        if(!Javier.contraseña.equals(contra))
                         {
-                          System.out.println("Escriba el número feedback que desea ver");
+                          System.out.println("Contraseña incorrecta"); 
+                        }
+                        else
+                        {
+                           System.out.println("Escriba el número feedback que desea ver");
                           try
                           {
                             int num = leer.nextInt(); leer.nextLine();
@@ -286,10 +291,6 @@ public class App
                             leer.nextLine();
                           }
                         }
-                        else
-                        {
-                          System.out.println("Contraseña incorrecta");  
-                        }
                         break;
 
                     case 9:
@@ -299,7 +300,17 @@ public class App
                           int dni = leer.nextInt();
                           leer.nextLine();
 
-                          cliactual = getCliente(clientes, dni);
+                          Cliente cliPrueba = getCliente(clientes, dni);
+                          System.out.println("Escriba la contraseña del usuario");
+                          contra = leer.nextLine(); 
+                          if(cliPrueba.contraseña.equals(contra))
+                          {
+                            cliactual = cliPrueba;
+                          }
+                          else
+                          {
+                            System.out.println("Contaseña incorrecta");
+                          }
                         }
                         catch(Exception e)
                         {
@@ -320,6 +331,7 @@ public class App
             catch(Exception e)
             {
                 System.out.println("Ingresa una opción (número)");
+                leer.nextLine();
             }
          
           }while(opcion != 10);
@@ -386,21 +398,21 @@ abstract static class Persona
 //4. Clase cliente
 static class Cliente extends Persona
 {
-    private String tienePromocion = "no";
     private int numHab;
     private int totalAPagar;
     private boolean solicitoComida = false;
     private String comida;
+    private String contraseña = "";
 
-    public Cliente(int DNI, String nombre, String apellido, String fechaNacimiento, String tienePromocion)
+    public Cliente(int DNI, String nombre, String apellido, String fechaNacimiento, String contraseña)
     {
        super(DNI, nombre, apellido, fechaNacimiento);
-       this.tienePromocion = tienePromocion;
+       this.contraseña = contraseña;
     }
 
     public void mostrarDatos() 
     {
-       System.out.println("DNI: " + this.DNI + "Nombre: " + this.nombre + "Apellido: " + this.apellido + "Fecha de nacimiento: " + this.fechaNacimiento + "Promocion: " + this.tienePromocion);
+       System.out.println("DNI: " + this.DNI + "Nombre: " + this.nombre + "Apellido: " + this.apellido + "Fecha de nacimiento: " + this.fechaNacimiento + " Se encuentra en la habitación "+ numHab + " y tiene un total a pagar de: " + totalAPagar + " soles.");
     }
 
     public void setHabitacion(int num)
@@ -420,6 +432,7 @@ static class Cliente extends Persona
       if(solicitoComida == true)
       {
          System.out.println("Ya has pedido comida!");
+         sc.close();
          return;
       }
         
@@ -442,6 +455,7 @@ static class Cliente extends Persona
 
             default:
             System.out.println("Esta no es una opción válida");
+            sc.close();
             return;
         }
 
@@ -460,7 +474,7 @@ static class Cliente extends Persona
         System.out.println("Elija un número!");
         sc.nextLine();
       }
-
+      sc.close();
     }
 
     public void Comer()
@@ -509,7 +523,7 @@ static class Habitacion
 static class Supervisor extends Persona
 {
   private int DNI;
-  private String contraseña;
+  private String contraseña = "";
 
   public Supervisor(int DNI, String nombre, String apellido, String fechaNacimiento, String contraseña)
   {
@@ -542,6 +556,7 @@ static class Supervisor extends Persona
       System.out.println("Este mensaje no existe");
     }
   }
+
   }
 }
 
