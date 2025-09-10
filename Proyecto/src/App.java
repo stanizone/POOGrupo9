@@ -254,8 +254,8 @@ public class App
                           try
                           {
                             int dni = leer.nextInt();
-                            Cliente cli = getCliente(clientes, dni);
-                            cli.mostrarDatos();
+                            leer.nextLine();
+                            Javier.mostrarDatosCliente(clientes, dni);
                           }
                           catch(Exception e)
                           {
@@ -274,16 +274,15 @@ public class App
                         contraseña = leer.nextLine();
                         if(contraseña == Javier.contraseña)
                         {
-                          System.out.println("Escriba el DNI del usuario que desea ver");
+                          System.out.println("Escriba el número feedback que desea ver");
                           try
                           {
-                            int dni = leer.nextInt();
-                            Cliente cli = getCliente(clientes, dni);
-                            cli.mostrarDatos();
+                            int num = leer.nextInt(); leer.nextLine();
+                            Javier.verFeedback(listafeedback, num);                           
                           }
                           catch(Exception e)
                           {
-                            System.out.println("DNI incorrecto");
+                            System.out.println("Este número de feedback no existe");
                             leer.nextLine();
                           }
                         }
@@ -292,14 +291,30 @@ public class App
                           System.out.println("Contraseña incorrecta");  
                         }
                         break;
-                        
+
                     case 9:
-                        System.out.println("Saliste del programa.");
+                        System.out.println("Selecciona el DNI de la otra persona para cambiar de usuario");
+                        try
+                        {
+                          int dni = leer.nextInt();
+                          leer.nextLine();
+
+                          cliactual = getCliente(clientes, dni);
+                        }
+                        catch(Exception e)
+                        {
+                          System.out.println("Codigo invalido");
+                          leer.nextLine();
+                        } 
                         break;
 
-                    default:
-                        System.out.println("Ingresa un número correcto.");
-                        break;
+                    case 10:
+                         System.out.println("Has salido del programa");
+                         break;
+                       
+                     default:
+                         System.out.println("Ingresa un número correcto.");
+                         break;
                 }
             }
             catch(Exception e)
@@ -307,7 +322,7 @@ public class App
                 System.out.println("Ingresa una opción (número)");
             }
          
-          }while(opcion != 8);
+          }while(opcion != 10);
 
           leer.close();
     }
@@ -413,6 +428,7 @@ static class Cliente extends Persona
       try
       {
         int op = sc.nextInt();
+        sc.nextLine();
         switch(op)
         {
             case 1: comida = "lasaña";
