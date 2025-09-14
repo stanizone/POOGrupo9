@@ -140,7 +140,7 @@ public class App
                             System.out.println("Necesitas estar registrado para reservar una habitación");
                             break;
                         }
-                        else
+                        else if(cliactual.numHab == 0)
                         {
                           System.out.println("Actualmente tenemos disponibles las siguientes habitaciones:\n");    
                           for(Habitacion hab : habitaciones)
@@ -173,8 +173,10 @@ public class App
                             habElegida.diasReservados = numDias;   
                             cliactual.totalAPagar = (habElegida.precioPorNoche * numDias);              
                           }
-                          
-
+                        }
+                        else
+                        {
+                          System.out.println("Usted ya tiene una habitación.");
                         }
                         break;
 
@@ -301,6 +303,7 @@ public class App
                           leer.nextLine();
 
                           Cliente cliPrueba = getCliente(clientes, dni);
+                          if(cliPrueba== null){System.out.println("Este usuario no existe");}
                           System.out.println("Escriba la contraseña del usuario");
                           contra = leer.nextLine(); 
                           if(cliPrueba.contraseña.equals(contra))
@@ -398,7 +401,7 @@ abstract static class Persona
 //4. Clase cliente
 static class Cliente extends Persona
 {
-    private int numHab;
+    private int numHab = 0;
     private int totalAPagar;
     private boolean solicitoComida = false;
     private String comida;
@@ -412,7 +415,7 @@ static class Cliente extends Persona
 
     public void mostrarDatos() 
     {
-       System.out.println("DNI: " + this.DNI + "Nombre: " + this.nombre + "Apellido: " + this.apellido + "Fecha de nacimiento: " + this.fechaNacimiento + " Se encuentra en la habitación "+ numHab + " y tiene un total a pagar de: " + totalAPagar + " soles.");
+       System.out.println("DNI: " + this.DNI + " Nombre: " + this.nombre + " Apellido: " + this.apellido + " Fecha de nacimiento: " + this.fechaNacimiento + " Se encuentra en la habitación "+ numHab + " y tiene un total a pagar de: " + totalAPagar + " soles.");
     }
 
     public void setHabitacion(int num)
