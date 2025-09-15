@@ -11,7 +11,7 @@ public class Ej3
         estudiantes.add("Angel");
         estudiantes.add("Miguel");
         estudiantes.add("Will");
-        estudiantes.add("Franco");
+        estudiantes.add("Franco"); //agregamos los 5 estudiantes
         
 
         System.out.println("Lista completa de estudiantes: " + estudiantes);
@@ -20,7 +20,7 @@ public class Ej3
         System.out.println("");
 
         System.out.println("Lista después de eliminar el tercer estudiante:");
-        for (String nombre : estudiantes) 
+        for (String nombre : estudiantes) //hacemos un forEach
         {
             System.out.println(nombre);
         }

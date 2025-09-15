@@ -19,13 +19,13 @@ class Calculadora
     }
 
     
-    public int sumar(int a, int b, int c) 
+    public int sumar(int a, int b, int c) //sobrecarga
     {
         return a + b + c;
     }
 
     
-    public double sumar(double a, double b) // double es para decimales
+    public double sumar(double a, double b) // sobrecarga, double es para decimales
     {
         return a + b;
     }

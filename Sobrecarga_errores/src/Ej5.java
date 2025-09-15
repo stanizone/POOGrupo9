@@ -10,25 +10,25 @@ public class Ej5
         try 
         {
             System.out.print("Ingrese un número entero: ");
-            int numero = sc.nextInt(); sc.nextLine();
+            int numero = sc.nextInt(); sc.nextLine();  //el programa registra el numero
 
             if (numero < 0) 
             {
-                throw new NumeroNegativoException("Se ha ingresado un número negativo");
+                throw new NumeroNegativoException("Se ha ingresado un número negativo"); //si el numero es menor a 0, nos da este error.
             }
 
-            System.out.println("Número ingresado correctamente");
+            System.out.println("Número ingresado correctamente"); //sino, nos lo permite
 
         } 
         catch (NumberFormatException e) 
         {
-            System.out.println("Ingresa un número válido.");
+            System.out.println("Ingresa un número válido."); //otros tipo de errores:
         } 
         catch (NumeroNegativoException e) 
         {
             System.out.println(e.getMessage());
         }
-        catch (InputMismatchException e)
+        catch (InputMismatchException e) //por ejemplo, este es para cuando ingresas algo que no es un número cuando pedimos uno.
         {
           System.out.println("Ingresa un número válido");
         }
